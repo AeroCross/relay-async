@@ -20,7 +20,7 @@
       <tbody>
       <% @tickets.each do |ticket| %>
           <tr>
-            <td><%= ticket.user_id %></td>
+            <td><%= ticket.user.username %></td>
             <td><%= ticket.subject %></td>
             <td><%= ticket.content %></td>
             <td><%= link_to 'Show', ticket %></td>
@@ -30,9 +30,5 @@
       <% end %>
       </tbody>
     </table>
-
-    <br>
-
-    <%= link_to 'New Ticket', new_ticket_path, {class: 'btn btn-primary'} %>
   </div>
 </div>
