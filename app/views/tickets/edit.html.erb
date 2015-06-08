@@ -2,5 +2,9 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @ticket %> |
-<%= link_to 'Back', tickets_path %>
+<br />
+
+<div class="btn-group">
+  <a href="<%= url_for(@ticket) %>" class="btn btn-default">Show</a>
+  <a href="<%= url_for(tickets_path) %>" class="btn btn-default">Back</a>
+</div>
