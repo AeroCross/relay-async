@@ -28,7 +28,7 @@
   <div class="col-lg-4">
     <%= form_for :message do |f| %>
         <div class="form-group">
-            <%= f.text_field :content, {placeholder: 'Send a reply', class: 'form-control'} %>
+            <%= f.text_area :content, {placeholder: 'Send a reply', class: 'form-control', rows: 5} %>
         </div>
 
         <div class="form-group">
