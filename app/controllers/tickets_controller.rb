@@ -10,6 +10,7 @@ class TicketsController < ApplicationController
   # GET /tickets/1
   # GET /tickets/1.json
   def show
+    @messages = Message.includes(:user).where(ticket_id: params[:id])
   end
 
   # GET /tickets/new

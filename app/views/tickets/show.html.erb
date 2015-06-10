@@ -1,21 +1,56 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @ticket.user_id %>
-</p>
+<div class="row">
+  <div class="col-lg-12">
+    <p>
+      <strong>User:</strong>
+      <%= @ticket.user.username %>
+    </p>
 
-<p>
-  <strong>Subject:</strong>
-  <%= @ticket.subject %>
-</p>
+    <p>
+      <strong>Subject:</strong>
+      <%= @ticket.subject %>
+    </p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @ticket.content %>
-</p>
+    <p>
+      <strong>Content:</strong>
+      <%= @ticket.content %>
+    </p>
 
-<div class="btn-group">
-  <a href="<%= url_for(edit_ticket_path) %>" class="btn btn-default">Edit</a>
-  <a href="<%= url_for(tickets_path) %>" class="btn btn-default">Back</a>
+    <div class="btn-group">
+      <a href="<%= url_for(edit_ticket_path) %>" class="btn btn-default">Edit</a>
+      <a href="<%= url_for(tickets_path) %>" class="btn btn-default">Back</a>
+    </div>
+  </div>
+</div>
+
+<div class="row top-buffer">
+  <div class="col-lg-4">
+    <%= form_for :message do |f| %>
+        <div class="form-group">
+            <%= f.text_field :content, {placeholder: 'Send a reply', class: 'form-control'} %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit('Reply', {class: 'btn btn-primary'}) %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <% @messages.each do |message| %>
+        <p>
+          <strong><%= message.user.username %></strong> <small><%= message.created_at %></small>
+          <% if message.source == 'chat' %>
+              <small>(<%= message.source  %>)</small>
+          <% end %>
+        </p>
+
+        <p><%= message.content %></p>
+
+        <hr />
+    <% end %>
+  </div>
 </div>
