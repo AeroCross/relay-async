@@ -13,7 +13,7 @@
 
     <div class="form-group">
       <%= f.label :user_id %><br>
-      <%= f.number_field :user_id, {:class => 'form-control'} %>
+      <%= f.number_field :user_id, {:class => 'form-control', value: session[:id]} %>
     </div>
 
   <div class="form-group">
