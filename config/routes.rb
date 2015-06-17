@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post 'messages/create', to: 'messages#create'
+  get 'messages/show/:id', to: 'messages#show'
+
   root to: 'tickets#index'
   resources :tickets
   resources :users
