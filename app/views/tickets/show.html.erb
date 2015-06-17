@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<% unless notice.blank? %>
+    <!-- make sure to adapt to situations down the line -->
+    <div class="alert alert-<%= flash[:type] %>">
+      <%= notice %>
+    </div>
+<% end %>
 
 <div class="row">
   <div class="col-lg-12">
@@ -26,10 +31,14 @@
 
 <div class="row top-buffer">
   <div class="col-lg-4">
-    <%= form_for :message do |f| %>
+    <%= form_for :message, url: messages_create_url do |f| %>
         <div class="form-group">
             <%= f.text_area :content, {placeholder: 'Send a reply', class: 'form-control', rows: 5} %>
         </div>
+
+        <%= f.hidden_field :source, {value: 'ticket'} %>
+        <%= f.hidden_field :user_id, {value: session[:id]} %>
+        <%= f.hidden_field :ticket_id, {value: params[:id] } %>
 
         <div class="form-group">
           <%= f.submit('Reply', {class: 'btn btn-primary'}) %>

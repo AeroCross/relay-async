@@ -1,6 +1,7 @@
-<% unless notice.nil? %>
-    <div class="">
-      <p id="notice"><%= notice %></p>
+<% unless notice.blank? %>
+    <!-- make sure to adapt to situations down the line -->
+    <div class="alert alert-<%= flash[:type] %>">
+      <%= notice %>
     </div>
 <% end %>
 
