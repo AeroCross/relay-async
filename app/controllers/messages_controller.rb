@@ -7,8 +7,10 @@ class MessagesController < ApplicationController
     # respond in json (and others using the methods in the format block object)
     respond_to do |format|
       if @message.save
+        format.html {redirect_to(ticket_url(id: params[:message][:ticket_id]), notice: 'Message posted', flash: {type: 'success'})}
         format.json {render json: {content: 'created', status: :created}}
       else
+        format.html {redirect_to(ticket_url(id: params[:message][:ticket_id]), notice: 'An error occurred', flash: {type: 'danger'})}
         format.json {render json: {content: 'not created.', status: :unprocessable_entity }}
       end
     end
@@ -23,6 +25,6 @@ class MessagesController < ApplicationController
 
   private
     def message_params
-      params.require(:ticket).permit(:ticket_id, :user_id, :content, :source)
+      params.require(:message).permit(:ticket_id, :user_id, :content, :source)
     end
 end
