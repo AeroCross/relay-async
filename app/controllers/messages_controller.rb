@@ -7,7 +7,13 @@ class MessagesController < ApplicationController
     # respond in json (and others using the methods in the format block object)
     respond_to do |format|
       if @message.save
-        format.html {redirect_to(ticket_url(id: params[:message][:ticket_id]), notice: 'Message posted', flash: {type: 'success'})}
+        format.html do
+          user = User.find(params[:message][:user_id])
+          ticket = Ticket.find(params[:message][:ticket_id])
+
+          TicketMailer.chat_invite(user, ticket, @message).deliver_now
+          redirect_to(ticket_url(id: params[:message][:ticket_id]), notice: 'Message posted', flash: {type: 'success'})
+        end
         format.json {render json: {content: 'created', status: :created}}
       else
         format.html {redirect_to(ticket_url(id: params[:message][:ticket_id]), notice: 'An error occurred', flash: {type: 'danger'})}
