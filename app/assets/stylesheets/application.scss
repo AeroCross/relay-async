@@ -11,8 +11,10 @@
  * file per style scope.
  *
  */
-@import "bootstrap-sprockets";
+
+@import "bootswatch/paper/variables";
 @import "bootstrap";
+@import "bootswatch/paper/bootswatch";
 
 body {
   padding-top: 70px;
@@ -20,4 +22,8 @@ body {
 
 .top-buffer {
   margin-top: 20px;
+}
+
+.logo {
+  margin-top: -12px;
 }
