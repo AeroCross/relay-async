@@ -1,9 +1,11 @@
 class MessagesController < ApplicationController
+  before_filter :cors_set_access_control_headers
+
   def create
     # first create the message_params private method that will whitelist
     # all the parameters then create it with mass-assignment
     @message = Message.new(message_params)
-
+    
     # respond in json (and others using the methods in the format block object)
     respond_to do |format|
       if @message.save
@@ -32,5 +34,12 @@ class MessagesController < ApplicationController
   private
     def message_params
       params.require(:message).permit(:ticket_id, :user_id, :content, :source)
+    end
+
+    def cors_set_access_control_headers
+      headers['Access-Control-Allow-Origin'] = '*'
+      headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
+      headers['Access-Control-Request-Method'] = '*'
+      headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
     end
 end
