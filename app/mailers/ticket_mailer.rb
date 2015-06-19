@@ -4,7 +4,10 @@ class TicketMailer < ApplicationMailer
     @user = user
     @ticket = ticket
     @message = message
-    @url = ticket_url id: @ticket.id
+    @ticket_url = ticket_url id: @ticket.id
+
+    # @TODO: this should be a global default or something
+    @chat_url = 'http://localhost:8080/chat/' + @ticket.id.to_s
     mail to: @user.email, subject: "Response about #{@ticket.id}: #{@ticket.subject}"
   end
 end
