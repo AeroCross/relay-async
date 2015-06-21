@@ -1,14 +1,22 @@
 Rails.application.routes.draw do
 
-  # root rout when URL is accessed by itself
+  # matched routes
+  # messages
+  post 'messages/create', to: 'messages#create'
+  get 'messages/show/:id', to: 'messages#show'
+
+  # access
+  get 'access/', to: 'access#login'
+  get 'access/index', to: 'access#login'
+  get 'access/login', to: 'access#login'
+  post 'access/attempt', to: 'access#attempt'
+
+  # root route when URL is accessed by itself
   root to: 'tickets#index'
 
   # generated with the scaffolding
   resources :tickets
   resources :users
-
-  # 'default' route, deprecated in rails 4 — just for dev purposes
-  match ':controller(/:action(/:id))', :via => [:get, :post]
 
   # ==========================================
   # The priority is based upon order of creation: first created -> highest priority.
