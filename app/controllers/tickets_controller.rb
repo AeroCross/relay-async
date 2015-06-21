@@ -1,9 +1,6 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
-  # TODO: remove when authentication and sessions have been properly implemented
-  before_action :set_session
-
   # GET /tickets
   # GET /tickets.json
   def index
@@ -74,12 +71,5 @@ class TicketsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
       params.require(:ticket).permit(:user_id, :subject, :content)
-    end
-
-    # TODO: remove when authentication and sessions have been properly implemented
-    def set_session
-      user = User.find 1
-      session[:id] = user.id
-      session[:username] = user.username
     end
 end

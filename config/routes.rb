@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'access/', to: 'access#login'
   get 'access/index', to: 'access#login'
   get 'access/login', to: 'access#login'
+  get 'access/logout', to: 'access#logout'
   post 'access/attempt', to: 'access#attempt'
 
   # root route when URL is accessed by itself
