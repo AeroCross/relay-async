@@ -1,11 +1,25 @@
 Rails.application.routes.draw do
+
+  # matched routes
+  # messages
   post 'messages/create', to: 'messages#create'
   get 'messages/show/:id', to: 'messages#show'
 
+  # access
+  get 'access/', to: 'access#login'
+  get 'access/index', to: 'access#login'
+  get 'access/login', to: 'access#login'
+  get 'access/logout', to: 'access#logout'
+  post 'access/attempt', to: 'access#attempt'
+
+  # root route when URL is accessed by itself
   root to: 'tickets#index'
+
+  # generated with the scaffolding
   resources :tickets
   resources :users
 
+  # ==========================================
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

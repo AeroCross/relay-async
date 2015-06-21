@@ -13,12 +13,30 @@ def random_date(start: Date.new(2014, 01, 01).to_time.to_i, finish: Time.now.to_
 end
 
 # amount of records
-users = (1..10)
+users = (1..8)
 tickets = (1..50)
 messages = (1..150)
 id = Random.new
 
 # fill out users
+# first, create a default admin and normal user
+u = [{
+         fullname: 'Administrator',
+         username: 'admin',
+         email: 'admin@example.com',
+         password: 'admin',
+         role: 'admin',
+         created_at: random_date
+     }, {
+         fullname: 'John Doe',
+         username: 'jdoe',
+         email: 'jdoe@example.com',
+         password: 'jdoe',
+         role: 'normal',
+         created_at: random_date
+     }]
+User.create(u)
+
 users.each do
   u = User.new
   u.fullname = Faker::Name.name
