@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-  post 'messages/create', to: 'messages#create'
-  get 'messages/show/:id', to: 'messages#show'
 
+  # root rout when URL is accessed by itself
   root to: 'tickets#index'
+
+  # generated with the scaffolding
   resources :tickets
   resources :users
 
+  # 'default' route, deprecated in rails 4 — just for dev purposes
+  match ':controller(/:action(/:id))', :via => [:get, :post]
+
+  # ==========================================
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
