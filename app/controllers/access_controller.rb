@@ -1,10 +1,6 @@
 class AccessController < ApplicationController
   layout 'login'
 
-  def index
-    # access#attempt
-  end
-
   def login
     # login form
   end
@@ -13,6 +9,7 @@ class AccessController < ApplicationController
   def attempt
     if params[:username].present? && params[:password].present?
       # @TODO: this can possibly be refactored into the model by using .authenticate straight away
+      # to prevent RubyMine's dumbass lint
       found_user = User.where(:username => params[:username]).first
       if found_user
         authorised_user = found_user.authenticate(params[:password])
@@ -36,9 +33,7 @@ class AccessController < ApplicationController
         session[:role] = authorised_user.role
 
         # and redirect
-        flash[:notice] = 'Logged in! To be implemented'
-        flash[:type] = 'success'
-        redirect_to '/access/login'
+        redirect_to :root
         return
 
       # incorrect information
