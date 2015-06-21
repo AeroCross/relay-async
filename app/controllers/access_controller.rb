@@ -2,7 +2,7 @@ class AccessController < ApplicationController
   layout 'login'
 
   def index
-    # route to default?
+    # access#attempt
   end
 
   def login
@@ -12,22 +12,31 @@ class AccessController < ApplicationController
   # POST
   def attempt
     if params[:username].present? && params[:password].present?
-      # check if there's someone in the database with that username
       found_user = User.where(:username => params[:username]).first
-
-      # if so, try to authenticate
       if found_user
         authorised_user = found_user.authenticate(params[:password])
+      else
+        # one redirect should be used, not two
+        redirect_to '/access/login', notice: 'Incorrect username or password', flash: {type: 'warning'}
+        return
       end
 
-      # if auth is successful, then we can go ahead and set up stuff like sessions
-      # and redirect them to the root of the application
       if authorised_user
-        # do stuff with authenticated user
+        # log in and redirect
+        redirect_to '/access/login', notice: 'Logged in! To be implemented', flash: {type: 'success'}
+        return
       else
-        # do stuff with the wrong login
+        redirect_to '/access/login', notice: 'Incorrect username or password', flash: {type: 'warning'}
+        return
       end
+    else
+      # looks like this needs to be solved by some sort of form validation
+      redirect_to '/access/login', notice: 'All fields are required', flash: {type: 'warning'}
+      return
     end
+
+    # if anything fails
+    redirect_to '/access/login', notice: 'Incorrect username or password', flash: {type: 'warning'}
   end
 
   def logout
