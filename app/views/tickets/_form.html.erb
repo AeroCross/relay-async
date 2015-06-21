@@ -1,4 +1,5 @@
 <%= form_for(@ticket) do |f| %>
+    <!-- @TODO: HMMM???? -->
   <% if @ticket.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
@@ -12,21 +13,18 @@
   <% end %>
 
     <div class="form-group">
-      <%= f.label :user_id %><br>
-      <%= f.number_field :user_id, {:class => 'form-control', value: session[:id]} %>
+        <%= f.label :subject %><br>
+        <%= f.text_area :subject, {:class => 'form-control'} %>
+    </div>
+    <div class="form-group">
+        <%= f.label :content %><br>
+        <%= f.text_area :content, {:class => 'form-control'}%>
     </div>
 
-  <div class="form-group">
-    <%= f.label :subject %><br>
-    <%= f.text_area :subject, {:class => 'form-control'} %>
-  </div>
-  <div class="form-group">
-    <%= f.label :content %><br>
-    <%= f.text_area :content, {:class => 'form-control'}%>
-  </div>
+    <%= f.hidden_field :user_id, {:class => 'form-control', value: session[:id]} %>
 
-  <div class="actions">
-    <%= f.submit({:class => 'btn btn-primary'}) %>
-  </div>
+    <div class="actions">
+      <%= f.submit({:class => 'btn btn-primary'}) %>
+    </div>
 
 <% end %>
