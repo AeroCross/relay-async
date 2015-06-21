@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get 'access/logout', to: 'access#logout'
   post 'access/attempt', to: 'access#attempt'
 
+  # Chat API
+  post 'chat/auth', to: 'chat#auth'
+
   # root route when URL is accessed by itself
   root to: 'tickets#index'
 

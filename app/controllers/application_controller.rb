@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # this prevents unauthorised users to get into the system
   def confirm_login
     unless session[:id]
       flash[:notice] = 'You need to be logged in'
