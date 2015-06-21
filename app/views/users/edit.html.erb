@@ -1,6 +1,8 @@
-<h1>Editing User</h1>
-
 <%= render 'form' %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<br />
+
+<div class="btn-group">
+  <a href="<%= url_for(@user) %>" class="btn btn-default">Show</a>
+  <a href="<%= url_for(users_path) %>" class="btn btn-default">Back</a>
+</div>

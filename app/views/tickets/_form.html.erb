@@ -1,5 +1,4 @@
 <%= form_for(@ticket) do |f| %>
-    <!-- @TODO: HMMM???? -->
   <% if @ticket.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
