@@ -13,7 +13,7 @@ class ChatController < ApplicationController
   # returns the user
   def auth
     id = params[:id]
-    auth = params[:auth].to_i
+    auth = params[:auth]
     email = params[:email]
 
     # get a ticket with this auth code
@@ -24,9 +24,18 @@ class ChatController < ApplicationController
       ticket = nil
     end
 
+    # and a user with the email
+    begin
+      user = User.where(:email => email).first
+
+    rescue ActiveRecord::RecordNotFound
+      user = nil
+    end
+
     # if the email sent matches the one in the ticket, then the person can enter the room
     respond_to do |format|
-      if ticket.present? && ticket.auth == auth && ticket.user.email == email
+      # refactor much?
+      if ticket.present? && user.present? && user.role == 'admin' && ticket.auth_admin == auth || ticket.present? && ticket.auth_client == auth && ticket.user.email == email
         format.json {render json: ticket.user, except: [:password_digest], status: :ok}
       else
         format.json {render json: {}, status: :forbidden}
