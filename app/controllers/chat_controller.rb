@@ -36,7 +36,7 @@ class ChatController < ApplicationController
     respond_to do |format|
       # refactor much?
       if ticket.present? && user.present? && user.role == 'admin' && ticket.auth_admin == auth || ticket.present? && ticket.auth_client == auth && ticket.user.email == email
-        format.json {render json: ticket.user, except: [:password_digest], status: :ok}
+        format.json {render json: user, except: [:password_digest], status: :ok}
       else
         format.json {render json: {}, status: :forbidden}
       end
