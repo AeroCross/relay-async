@@ -5,7 +5,7 @@
 <% end %>
 
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-10">
     <p>
       <strong>User:</strong>
       <%= @ticket.user.username %>
@@ -25,6 +25,10 @@
       <a href="<%= url_for(edit_ticket_path) %>" class="btn btn-default">Edit</a>
       <a href="<%= url_for(tickets_path) %>" class="btn btn-default">Back</a>
     </div>
+  </div>
+  <div class="col-lg-2">
+    <p><strong>Admin Auth Code:</strong><br /> <%= @ticket.auth_admin %></p>
+    <p><strong>Client Auth Code:</strong><br /> <%= @ticket.auth_client %></p>
   </div>
 </div>
 
