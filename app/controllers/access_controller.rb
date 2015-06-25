@@ -3,6 +3,7 @@ class AccessController < ApplicationController
 
   def login
     # login form
+    # @TODO: if logged in, redirect to :root
   end
 
   # POST

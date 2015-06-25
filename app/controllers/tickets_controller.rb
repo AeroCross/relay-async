@@ -1,4 +1,6 @@
 class TicketsController < ApplicationController
+  require "#{Rails.root}/lib/utilities"
+
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :confirm_login
 
@@ -27,6 +29,8 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     @ticket = Ticket.new(ticket_params)
+    @ticket.auth_admin = random_string(20).upcase
+    @ticket.auth_client = random_string.upcase
 
     respond_to do |format|
       if @ticket.save
