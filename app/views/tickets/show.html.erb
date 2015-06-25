@@ -4,6 +4,7 @@
     </div>
 <% end %>
 
+<!-- message information -->
 <div class="row">
   <div class="col-lg-10">
     <p>
@@ -26,22 +27,31 @@
       <a href="<%= url_for(tickets_path) %>" class="btn btn-default">Back</a>
     </div>
   </div>
+
+  <!-- auth codes -->
   <div class="col-lg-2">
-    <p><strong>Admin Auth Code:</strong><br /> <%= @ticket.auth_admin %></p>
-    <p><strong>Client Auth Code:</strong><br /> <%= @ticket.auth_client %></p>
+    <div class="panel panel-warning">
+      <div class="panel-heading"><p class="panel-title">Admin Auth Code</p></div>
+      <div class="panel-body"><%= @ticket.auth_admin %></p></div>
+    </div>
+    <div class="panel panel-success">
+      <div class="panel-heading"><p class="panel-title">Client Auth Code</p></div>
+      <div class="panel-body"><%= @ticket.auth_client %></div>
+    </div>
   </div>
 </div>
 
+<!-- message reply -->
 <div class="row top-buffer">
   <div class="col-lg-4">
     <%= form_for :message, url: messages_create_url do |f| %>
         <div class="form-group">
-            <%= f.text_area :content, {placeholder: 'Send a reply', class: 'form-control', rows: 5} %>
+          <%= f.text_area :content, {placeholder: 'Send a reply', class: 'form-control', rows: 5} %>
         </div>
 
         <%= f.hidden_field :source, {value: 'ticket'} %>
         <%= f.hidden_field :user_id, {value: session[:id]} %>
-        <%= f.hidden_field :ticket_id, {value: params[:id] } %>
+        <%= f.hidden_field :ticket_id, {value: params[:id]} %>
 
         <div class="form-group">
           <%= f.submit('Reply', {class: 'btn btn-primary'}) %>
@@ -50,24 +60,31 @@
   </div>
 </div>
 
+<!-- messages -->
 <% @messages.each do |message| %>
     <div class="row">
       <% if message.source == 'chat' %>
-          <div class="col-lg-12">
-            <blockquote><strong><%= message.user.username %></strong> (<%= message.created_at %>): <%= message.content %></blockquote>
-          </div>
-      <% else %>
-          <div class="col-lg-12">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <strong><%= message.user.username %></strong> <small><%= message.created_at %></small>
-                </div>
 
-                <div class="panel-body">
-                  <p><%= message.content %></p>
-                </div>
-              </div>
+          <div class="col-lg-12">
+            <blockquote><strong><%= message.user.username %></strong> (<%= message.created_at %>
+              ): <%= message.content %></blockquote>
           </div>
+
+      <% else %>
+
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <strong><%= message.user.username %></strong>
+                <small><%= message.created_at %></small>
+              </div>
+
+              <div class="panel-body">
+                <p><%= message.content %></p>
+              </div>
+            </div>
+          </div>
+
       <% end %>
 
     </div>
