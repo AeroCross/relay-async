@@ -6,11 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-require 'date'
-def random_date(start: Date.new(2014, 01, 01).to_time.to_i, finish: Time.now.to_i)
-  date = (start..finish)
-  Time.at(rand(date))
-end
+require "#{Rails.root}/lib/utilities"
 
 # amount of records
 users = (1..8)
@@ -54,6 +50,8 @@ tickets.each do
   t.user_id = id.rand(users)
   t.subject = Faker::Lorem.sentence(4, true, 6)
   t.content = Faker::Lorem.paragraph(4, true, 6)
+  t.auth_client = random_string.upcase
+  t.auth_admin = random_string(20).upcase
   t.save
   t.created_at = random_date
   t.save
