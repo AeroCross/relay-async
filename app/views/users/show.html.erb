@@ -1,24 +1,40 @@
-<p id="notice"><%= notice %></p>
+<% unless notice.blank? %>
+    <div class="alert alert-<%= flash[:type].present? ? flash[:type] : 'info' %>">
+      <%= notice %>
+    </div>
+<% end %>
 
-<p>
-  <strong>Fullname:</strong>
-  <%= @user.fullname %>
-</p>
+<div class="row">
+  <div class="col-lg-12">
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+    <p>
+    <strong>ID:</strong>
+    <%= @user.id%>
+    </p>
 
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
+    <p>
+      <strong>Name:</strong>
+      <%= @user.fullname %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+    <p>
+      <strong>Username:</strong>
+      <%= @user.username %>
+    </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+    <p>
+      <strong>Content:</strong>
+      <%= @user.email %>
+    </p>
+
+    <p>
+      <strong>Role:</strong>
+      <%= @user.role %>
+    </p>
+
+    <div class="btn-group">
+      <a href="<%= url_for(edit_user_path) %>" class="btn btn-default">Edit</a>
+      <a href="<%= url_for(users_path) %>" class="btn btn-default">Back</a>
+    </div>
+  </div>
+</div>

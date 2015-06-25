@@ -1,11 +1,11 @@
-<% unless notice.nil? %>
-    <div class="">
-      <p id="notice"><%= notice %></p>
+<% unless notice.blank? %>
+    <div class="alert alert-<%= flash[:type].present? ? flash[:type] : 'info' %>">
+      <%= notice %>
     </div>
 <% end %>
 
 <div class="row">
-  <div class="col-lg-10">
+  <div class="col-lg-12">
 
     <table class="table table-striped table-bordered table-hover table-responsive">
       <thead>
@@ -13,15 +13,15 @@
         <th>User</th>
         <th>Subject</th>
         <th>Content</th>
-        <th colspan="3"></th>
+        <th colspan="3">Actions</th>
       </tr>
       </thead>
 
       <tbody>
       <% @tickets.each do |ticket| %>
           <tr>
-            <td><%= ticket.user_id %></td>
-            <td><%= ticket.subject %></td>
+            <td><%= link_to ticket.user.fullname, edit_user_path(ticket.user.id) %></td>
+            <td><%= link_to ticket.subject, ticket_path(ticket.id) %></td>
             <td><%= ticket.content %></td>
             <td><%= link_to 'Show', ticket %></td>
             <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
@@ -30,9 +30,5 @@
       <% end %>
       </tbody>
     </table>
-
-    <br>
-
-    <%= link_to 'New Ticket', new_ticket_path, {class: 'btn btn-primary'} %>
   </div>
 </div>

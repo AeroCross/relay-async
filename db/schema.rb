@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604222232) do
+ActiveRecord::Schema.define(version: 20150622202525) do
 
   create_table "messages", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -23,20 +23,23 @@ ActiveRecord::Schema.define(version: 20150604222232) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.text     "subject",    limit: 65535
-    t.text     "content",    limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "user_id",     limit: 4
+    t.text     "subject",     limit: 65535
+    t.text     "content",     limit: 65535
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "auth_client", limit: 255,   default: "abc"
+    t.string   "auth_admin",  limit: 255,   default: "xyz"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "fullname",   limit: 255
-    t.string   "username",   limit: 255
-    t.string   "password",   limit: 255
-    t.string   "email",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "fullname",        limit: 255
+    t.string   "username",        limit: 255
+    t.string   "email",           limit: 255
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.string   "password_digest", limit: 255
+    t.string   "role",            limit: 255, default: "normal"
   end
 
 end

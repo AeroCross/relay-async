@@ -11,17 +11,19 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :subject %><br>
-    <%= f.text_area :subject, {:class => 'form-control'} %>
-  </div>
-  <div class="form-group">
-    <%= f.label :content %><br>
-    <%= f.text_area :content, {:class => 'form-control'}%>
-  </div>
+    <div class="form-group">
+        <%= f.label :subject %><br>
+        <%= f.text_area :subject, {:class => 'form-control'} %>
+    </div>
+    <div class="form-group">
+        <%= f.label :content %><br>
+        <%= f.text_area :content, {:class => 'form-control'}%>
+    </div>
 
-  <div class="actions">
-    <%= f.submit({:class => 'btn btn-primary'}) %>
-  </div>
+    <%= f.hidden_field :user_id, {:class => 'form-control', value: session[:id]} %>
+
+    <div class="actions">
+      <%= f.submit({:class => 'btn btn-primary'}) %>
+    </div>
 
 <% end %>

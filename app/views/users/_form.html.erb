@@ -1,33 +1,60 @@
 <%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, 'error') %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :username %><br>
+      <%= f.text_field :username, {:class => 'form-control'} %>
+      <p class="help-block">Remember to use this name to log in next time!</p>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :fullname %><br>
-    <%= f.text_field :fullname %>
-  </div>
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="form-group">
+      <%= f.label :password %><br>
+      <%= f.password_field :password, {:class => 'form-control'} %>
+      <p class="help-block">Leave blank to keep current password</p>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :fullname, 'Name' %><br>
+      <%= f.text_field :fullname, {:class => 'form-control'} %>
+      <p class="help-block">This will be used throughout the system as your display name</p>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %><br>
+      <%= f.text_field :email, {:class => 'form-control'} %>
+      <p class="help-block">Notifications will arrive here</p>
+    </div>
+
+    <br />
+    <!-- radios -->
+    <h5>Role assignment</h5>
+    <div class="radio">
+      <label>
+        <%= f.radio_button :role, 'admin' %>
+        Administrator
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <%= f.radio_button :role, 'normal' %>
+        Normal
+      </label>
+    </div>
+
+    <br />
+
+    <div class="actions">
+      <%= f.submit({:class => 'btn btn-primary'}) %>
+    </div>
+
 <% end %>

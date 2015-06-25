@@ -34,6 +34,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # custom gems
 gem 'bootstrap-sass', '~> 3.3.4'
+gem 'bootswatch-rails'
 gem 'sprockets-rails'
 gem 'faker'
 
