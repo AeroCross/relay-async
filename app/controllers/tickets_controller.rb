@@ -10,6 +10,11 @@ class TicketsController < ApplicationController
     @tickets = Ticket.includes(:user).all
   end
 
+  # GET /tickets/search
+  def search
+    redirect_to action: 'show', id: params[:id]
+  end
+
   # GET /tickets/1
   # GET /tickets/1.json
   def show
