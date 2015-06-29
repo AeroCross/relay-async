@@ -7,7 +7,13 @@ class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.json
   def index
+    # @TODO: have a "show all" setting
     @tickets = Ticket.includes(:user).all
+  end
+
+  # GET /tickets/search
+  def search
+    redirect_to action: 'show', id: params[:id]
   end
 
   # GET /tickets/1
@@ -75,6 +81,6 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:user_id, :subject, :content)
+      params.require(:ticket).permit(:user_id, :subject, :content, :status)
     end
 end

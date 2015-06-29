@@ -20,7 +20,10 @@
         <%= f.text_area :content, {:class => 'form-control'}%>
     </div>
 
-    <%= f.hidden_field :user_id, {:class => 'form-control', value: session[:id]} %>
+    <% if action_name == 'new' %>
+        <!-- this prevent the form overriding the user creator when editing -->
+        <% f.hidden_field :user_id, {:class => 'form-control', value: session[:id]} %>
+    <% end %>
 
     <div class="actions">
       <%= f.submit({:class => 'btn btn-primary'}) %>
