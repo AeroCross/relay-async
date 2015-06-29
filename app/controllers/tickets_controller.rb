@@ -7,6 +7,7 @@ class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.json
   def index
+    # @TODO: have a "show all" setting
     @tickets = Ticket.includes(:user).all
   end
 
