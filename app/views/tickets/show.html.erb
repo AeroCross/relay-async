@@ -34,7 +34,7 @@
         <div class="btn-group">
           <a href="<%= url_for(edit_ticket_path) %>" class="btn btn-default">Edit</a>
           <%= f.button 'Open', name: 'ticket[status]', value: 'open', class: 'btn btn-default' %>
-          <%= f.button 'Close', name: 'ticket[status]', value: 'close', class: 'btn btn-primary' %>
+          <%= f.button 'Close', name: 'ticket[status]', value: 'closed', class: 'btn btn-primary' %>
         </div>
     <% end %>
   </div>
