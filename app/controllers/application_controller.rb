@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     elsif id == session[:id]
       authorised = true
     end
-    
+
     unless authorised
       redirect_to tickets_path, flash: {notice: 'You don\'t have enough permissions to do that', type: 'warning'}
     end
