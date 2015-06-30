@@ -2,6 +2,11 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :confirm_login
 
+  # prevent regular users from messing with stuff
+  before_action only: [:show, :edit, :update, :destroy] do
+    restrict_access(@user.id)
+  end
+
   # GET /users
   # GET /users.json
   def index

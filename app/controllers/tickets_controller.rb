@@ -1,8 +1,13 @@
 class TicketsController < ApplicationController
   require "#{Rails.root}/lib/utilities"
 
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :confirm_login
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+
+  # prevent regular users from messing with stuff
+  before_action only: [:show, :edit, :update, :destroy] do
+    restrict_access(@ticket.user.id)
+  end
 
   # GET /tickets
   # GET /tickets.json
@@ -83,4 +88,5 @@ class TicketsController < ApplicationController
     def ticket_params
       params.require(:ticket).permit(:user_id, :subject, :content, :status)
     end
+
 end
