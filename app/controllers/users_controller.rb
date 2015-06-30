@@ -7,6 +7,10 @@ class UsersController < ApplicationController
     restrict_access(@user.id)
   end
 
+  before_action only: [:index, :new] do
+    restrict_access
+  end
+
   # GET /users
   # GET /users.json
   def index
