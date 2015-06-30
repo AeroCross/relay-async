@@ -34,14 +34,14 @@ class ApplicationController < ActionController::Base
     authorised = false
 
     # not checking for ownership, just role
-    if id.blank? && session[:role] == 'admin'
+    if session[:role] == 'admin'
       authorised = true
 
       # checking for ownership
     elsif id == session[:id]
       authorised = true
     end
-
+    
     unless authorised
       redirect_to tickets_path, flash: {notice: 'You don\'t have enough permissions to do that', type: 'warning'}
     end
