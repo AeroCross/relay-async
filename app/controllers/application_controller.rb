@@ -23,4 +23,27 @@ class ApplicationController < ActionController::Base
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   end
 
+  # the id here is the user id related to the resource being shown
+  # this is probably a bad idea
+  # e.g ticket.user.id = id then compare to session[:id]
+  #
+  # refactor: maybe use two methods: restricted_access (which checks user id's)
+  # and admins_only (which checks only for the admin role)
+  def restrict_access(id = nil)
+    # whitelisting approach
+    authorised = false
+
+    # not checking for ownership, just role
+    if id.blank? && session[:role] == 'admin'
+      authorised = true
+
+      # checking for ownership
+    elsif id == session[:id]
+      authorised = true
+    end
+
+    unless authorised
+      redirect_to tickets_path, flash: {notice: 'You don\'t have enough permissions to do that', type: 'warning'}
+    end
+  end
 end
