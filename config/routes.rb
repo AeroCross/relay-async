@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # matched routes
   # messages
   post 'messages/create', to: 'messages#create'
@@ -15,7 +14,11 @@ Rails.application.routes.draw do
   get 'access/logout', to: 'access#logout'
   post 'access/attempt', to: 'access#attempt'
 
-  # Chat API
+  # public history
+  get 'history', to: 'history#index'
+  post 'history/show', to: 'history#show'
+
+  # chat API
   post 'chat/auth', to: 'chat#auth'
 
   # root route when URL is accessed by itself
