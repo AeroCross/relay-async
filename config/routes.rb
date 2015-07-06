@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   # public history
   get 'history', to: 'history#index'
+  get 'history/show', to: 'history#index'
   post 'history/show', to: 'history#show'
 
   # chat API
