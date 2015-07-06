@@ -8,17 +8,17 @@ class AccessController < ApplicationController
 
   # POST
   def attempt
-    if params[:username].present? && params[:password].present?
+    if params[:email].present? && params[:password].present?
       # @TODO: this can possibly be refactored into the model by using .authenticate straight away
       # to prevent RubyMine's dumbass lint
-      found_user = User.where(:username => params[:username]).first
+      found_user = User.where(:email => params[:email]).first
       if found_user
         authorised_user = found_user.authenticate(params[:password])
 
       # no user found
       else
         # this message should be left as is — we don't want to uncover that there's no user
-        flash[:notice] = 'Incorrect username or password'
+        flash[:notice] = 'Incorrect email or password'
         flash[:type] = 'warning'
         redirect_to '/access/login'
         return
@@ -29,7 +29,6 @@ class AccessController < ApplicationController
         # set all information to a session for ease of retrieval
         session[:id] = authorised_user.id
         session[:fullname] = authorised_user.fullname
-        session[:username] = authorised_user.username
         session[:email] = authorised_user.email
         session[:role] = authorised_user.role
 
@@ -39,7 +38,7 @@ class AccessController < ApplicationController
 
       # incorrect information
       else
-        flash[:notice] = 'Incorrect username or password'
+        flash[:notice] = 'Incorrect email or password'
         flash[:type] = 'warning'
         redirect_to '/access/login'
         return
@@ -56,7 +55,6 @@ class AccessController < ApplicationController
   def logout
     session[:id] = nil
     session[:fullname] = nil
-    session[:username] = nil
     session[:email] = nil
     session[:role] = nil
 
