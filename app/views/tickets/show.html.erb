@@ -22,10 +22,21 @@
       <%= @ticket.content %>
     </p>
 
-    <div class="btn-group">
-      <a href="<%= url_for(edit_ticket_path) %>" class="btn btn-default">Edit</a>
-      <a href="<%= url_for(tickets_path) %>" class="btn btn-default">Back</a>
-    </div>
+    <p>
+      <strong>Status:</strong>
+      
+      <span class="label label-<%= @ticket.status == 'open' ? 'warning' : 'success' %>">
+        <%=  @ticket.status.capitalize %>
+      </span>
+    </p>
+
+    <%= form_for @ticket do |f| %>
+        <div class="btn-group">
+          <a href="<%= url_for(edit_ticket_path) %>" class="btn btn-default">Edit</a>
+          <%= f.button 'Open', name: 'ticket[status]', value: 'open', class: 'btn btn-default' %>
+          <%= f.button 'Close', name: 'ticket[status]', value: 'closed', class: 'btn btn-primary' %>
+        </div>
+    <% end %>
   </div>
 
   <!-- auth codes -->

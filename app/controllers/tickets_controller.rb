@@ -1,13 +1,24 @@
 class TicketsController < ApplicationController
   require "#{Rails.root}/lib/utilities"
 
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :confirm_login
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+
+  # prevent regular users from messing with stuff
+  before_action only: [:show, :edit, :update, :destroy] do
+    restrict_access(@ticket.user.id)
+  end
 
   # GET /tickets
   # GET /tickets.json
   def index
+    # @TODO: have a "show all" setting
     @tickets = Ticket.includes(:user).all
+  end
+
+  # GET /tickets/search
+  def search
+    redirect_to action: 'show', id: params[:id]
   end
 
   # GET /tickets/1
@@ -75,6 +86,7 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:user_id, :subject, :content)
+      params.require(:ticket).permit(:user_id, :subject, :content, :status)
     end
+
 end

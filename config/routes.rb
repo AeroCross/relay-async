@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   post 'messages/create', to: 'messages#create'
   get 'messages/show/:id', to: 'messages#show'
 
+  # tickets
+  get 'tickets/search', to: 'tickets#search'
+
   # access
   get 'access/', to: 'access#login'
   get 'access/index', to: 'access#login'
