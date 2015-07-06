@@ -7,11 +7,16 @@ class HistoryController < ApplicationController
 
   def show
     begin
-      @ticket = Ticket.included(:users).find(params[:ticket_id])
+      # check if the ticket exists first
+      @ticket = Ticket.includes(:user, :messages).find(params[:ticket_id])
+
+      # then if the email matches the ticket
+      if params[:email] != @ticket.user.email
+        raise ActiveRecord::RecordNotFound
+      end
     rescue
       redirect_to history_path, flash: {notice: 'We couldn\'t find a ticket with that information. Make sure you check your email for the right information.', type: 'warning text-center'}
     end
-    # also check if the ticket belongs to the person (i.e email matches)
   end
 
   private
