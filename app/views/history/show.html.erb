@@ -1,2 +1,37 @@
-<h1>History#show</h1>
-<p>Find me in app/views/history/show.html.erb</p>
+<!-- ticket -->
+<div class="row">
+  <div class="col-lg-12">
+
+    <!-- initial ticket information -->
+    <h4><%= @ticket.subject %></h4>
+    <p><%= @ticket.content %></p>
+
+    <!-- date data -->
+    <p class="text-muted">
+      <small>
+        Submitted on
+        <strong><%= @ticket.created_at.strftime '%A, %B %d, %Y at %I:%M:%S%P' %></strong> by
+        <strong><%= @ticket.user.fullname %></strong>
+      </small>
+    </p>
+
+    <!-- reply form -->
+    <%= form_tag '/messages/create' do |f| %>
+      <div class="form-group">
+        <%= label_tag :content, 'Send a reply' %>
+        <%= text_area_tag :content, nil, class: 'form-control' %>
+      </div>
+
+      <%= button_tag 'Send', class: 'btn btn-primary pull-right' %>
+    <% end %>
+  </div>
+</div>
+
+<!-- chat log-->
+<div class="row">
+  <div class="col-lg-12">
+      <% @ticket.messages.each do |m| %>
+        <!-- stuff to add -->
+      <% end %>
+  </div>
+</div>
