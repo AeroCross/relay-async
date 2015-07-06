@@ -10,7 +10,7 @@
 
   <%= form_tag '/access/attempt', method: 'post' do %>
       <div class="form-group">
-        <%= text_field_tag :username, nil, placeholder: 'Username', class: 'form-control' %>
+        <%= text_field_tag :email, nil, placeholder: 'Email', class: 'form-control', type: :email %>
       </div>
 
       <div class="form-group">
