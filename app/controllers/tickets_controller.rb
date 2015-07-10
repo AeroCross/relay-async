@@ -1,8 +1,10 @@
 class TicketsController < ApplicationController
   require "#{Rails.root}/lib/utilities"
 
-  before_action :confirm_login
+  before_action :confirm_login, except: [:history_index, :history_show]
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+
+  layout :resolve_layout
 
   # prevent regular users from messing with stuff
   before_action only: [:show, :edit, :update, :destroy] do
@@ -78,6 +80,27 @@ class TicketsController < ApplicationController
     end
   end
 
+  # GET /history
+  def history_index
+    # form asking for creator email and ticket id, which will be sent through an email
+  end
+
+  # POST /history/show
+  def history_show
+    begin
+      # check if the ticket exists first
+      @ticket = Ticket.includes(:user, :messages).find(params[:ticket_id])
+      @messages = @ticket.messages.order('created_at DESC')
+
+      # then if the email matches the ticket
+      if params[:email] != @ticket.user.email
+        raise ActiveRecord::RecordNotFound
+      end
+    rescue
+      redirect_to history_path, flash: {notice: 'We couldn\'t find a ticket with that information. Make sure you check your email for the right information.', type: 'warning text-center'}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
@@ -89,4 +112,13 @@ class TicketsController < ApplicationController
       params.require(:ticket).permit(:user_id, :subject, :content, :status)
     end
 
+    # Helper method to determine which layout should be used
+    def resolve_layout
+      case action_name
+        when 'history_index', 'history_show'
+          'history'
+        else
+          'application'
+      end
+    end
 end
