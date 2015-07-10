@@ -9,6 +9,7 @@ class HistoryController < ApplicationController
     begin
       # check if the ticket exists first
       @ticket = Ticket.includes(:user, :messages).find(params[:ticket_id])
+      @messages = @ticket.messages.order('created_at DESC')
 
       # then if the email matches the ticket
       if params[:email] != @ticket.user.email

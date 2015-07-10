@@ -27,11 +27,49 @@
   </div>
 </div>
 
+<h5>Previous messages</h5>
+<hr />
+
 <!-- chat log-->
-<div class="row">
-  <div class="col-lg-12">
-      <% @ticket.messages.each do |m| %>
-        <!-- stuff to add -->
-      <% end %>
-  </div>
+<div class="history">
+    <% @messages.each do |message| %>
+        <div class="row">
+          <% if message.source == 'chat' %>
+
+              <div class="col-lg-12">
+                <blockquote>
+                  <strong><%= message.user.email %></strong>
+
+                  <% if message.user.role == 'admin' %>
+                      <span class="label label-success">Admin</span>
+                  <% end %>
+
+                  (<%= message.created_at %>):
+                  <%= message.content %>
+                </blockquote>
+              </div>
+
+          <% else %>
+
+              <div class="col-lg-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <strong><%= message.user.email %></strong>
+                    <small><%= message.created_at %></small>
+
+                    <% if message.user.role == 'admin' %>
+                        <span class="label label-success">Admin</span>
+                    <% end %>
+
+                  </div>
+
+                  <div class="panel-body">
+                    <p><%= message.content %></p>
+                  </div>
+                </div>
+              </div>
+
+          <% end %>
+        </div>
+    <% end %>
 </div>
