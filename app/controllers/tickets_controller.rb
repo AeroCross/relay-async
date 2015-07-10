@@ -85,7 +85,7 @@ class TicketsController < ApplicationController
     # form asking for creator email and ticket id, which will be sent through an email
   end
 
-  # POST /history/show
+  # POST /history
   def history_show
     begin
       # check if the ticket exists first
@@ -100,6 +100,13 @@ class TicketsController < ApplicationController
       redirect_to history_path, flash: {notice: 'We couldn\'t find a ticket with that information. Make sure you check your email for the right information.', type: 'warning text-center'}
     end
   end
+
+  # GET /ticket/submit
+  def submit
+
+  end
+
+  # POST /ticket/submit
 
   private
     # Use callbacks to share common setup or constraints between actions.
