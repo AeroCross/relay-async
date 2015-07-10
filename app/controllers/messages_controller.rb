@@ -16,7 +16,13 @@ class MessagesController < ApplicationController
           TicketMailer.chat_invite(user, ticket, @message).deliver_now
 
           # and send back to the previous view
+          if params[:referrer] == '/history/show'
+            redirect_to history_path, flash: {type: 'success', notice: 'Message was sent. You will receive a reply shortly.'}
+            return
+          end
+
           redirect_to(ticket_url(id: params[:message][:ticket_id]), notice: 'Message posted', flash: {type: 'success'})
+          return
         end
 
         # if json, simply say "yup, all good"
