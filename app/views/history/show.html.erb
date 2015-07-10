@@ -19,7 +19,7 @@
     <%= form_tag '/messages/create' do |f| %>
       <div class="form-group">
         <%= label_tag :content, 'Send a reply' %>
-        <%= text_area_tag :content, nil, class: 'form-control' %>
+        <%= text_area_tag :content, nil, class: 'form-control', 'rows': 7 %>
       </div>
 
       <%= button_tag 'Send', class: 'btn btn-primary pull-right' %>
