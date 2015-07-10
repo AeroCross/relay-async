@@ -1,0 +1,79 @@
+<!-- ticket -->
+<div class="row">
+  <div class="col-lg-12">
+
+    <!-- initial ticket information -->
+    <h4><%= @ticket.subject %></h4>
+    <p><%= @ticket.content %></p>
+
+    <!-- date data -->
+    <p class="text-muted">
+      <small>
+        Submitted on
+        <strong><%= @ticket.created_at.strftime '%A, %B %d, %Y at %I:%M:%S%P' %></strong> by
+        <strong><%= @ticket.user.email %></strong>
+      </small>
+    </p>
+
+    <!-- reply form -->
+    <%= form_tag '/messages/create' do |f| %>
+      <div class="form-group">
+        <%= label_tag 'message[content]', 'Send a reply' %>
+        <%= text_area_tag 'message[content]', nil, class: 'form-control', 'rows': 7 %>
+        <%= hidden_field_tag 'message[user_id]', @ticket.user.id %>
+        <%= hidden_field_tag 'message[ticket_id]', @ticket.id %>
+        <%= hidden_field_tag 'message[source]', 'ticket' %>
+        <%= hidden_field_tag 'referrer', '/history/show' %>
+      </div>
+
+      <%= button_tag 'Send', class: 'btn btn-primary pull-right' %>
+    <% end %>
+  </div>
+</div>
+
+<h5>Previous messages</h5>
+<hr />
+
+<!-- chat log-->
+<div class="history">
+    <% @messages.each do |message| %>
+        <div class="row">
+          <% if message.source == 'chat' %>
+
+              <div class="col-lg-12">
+                <blockquote>
+                  <strong><%= message.user.email %></strong>
+
+                  <% if message.user.role == 'admin' %>
+                      <span class="label label-success">Admin</span>
+                  <% end %>
+
+                  (<%= message.created_at %>):
+                  <%= message.content %>
+                </blockquote>
+              </div>
+
+          <% else %>
+
+              <div class="col-lg-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <strong><%= message.user.email %></strong>
+                    <small><%= message.created_at %></small>
+
+                    <% if message.user.role == 'admin' %>
+                        <span class="label label-success">Admin</span>
+                    <% end %>
+
+                  </div>
+
+                  <div class="panel-body">
+                    <p><%= message.content %></p>
+                  </div>
+                </div>
+              </div>
+
+          <% end %>
+        </div>
+    <% end %>
+</div>
