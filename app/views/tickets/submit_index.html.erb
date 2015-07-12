@@ -1,0 +1,24 @@
+<div class="text-center">
+  <h3>Get in touch.</h3>
+  <p>We'll get back to you as soon as possible.</p>
+</div>
+
+<%= form_tag '/tickets/submit' do %>
+    <div class="form-group">
+      <%= label_tag :email, 'Email address' %>
+      <%= text_field_tag :email, nil, placeholder: 'Your email', class: 'form-control' %>
+      <p class="help-block">You'll be notified when we reply to your though here.</p>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag :subject, 'What\'s the problem?' %>
+      <%= text_field_tag :subject, nil, placeholder: 'A brief description of the situation', class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag :content, 'Can you provide any details of your question or issue?' %>
+      <%= text_area_tag :content, nil, class: 'form-control' %>
+    </div>
+
+    <%= button_tag 'Send', class: 'btn btn-primary pull-right' %>
+<% end %>

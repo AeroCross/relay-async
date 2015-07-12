@@ -31,11 +31,13 @@
   </div>
 </div>
 
-<h5>Previous messages</h5>
-<hr />
-
 <!-- chat log-->
 <div class="history">
+  <% unless @messages.blank? %>
+      
+      <h5>Previous messages</h5>
+      <hr />
+
     <% @messages.each do |message| %>
         <div class="row">
           <% if message.source == 'chat' %>
@@ -76,4 +78,5 @@
           <% end %>
         </div>
     <% end %>
+  <% end %>
 </div>
