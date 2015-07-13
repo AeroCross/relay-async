@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'tickets/search', to: 'tickets#search'
 
   # access
-  get 'access/', to: 'access#login'
+  get 'access', to: 'access#login'
   get 'access/sign_up', to: 'access#sign_up'
   post 'access/sign_up', to: 'access#create'
   get 'access/index', to: 'access#login'
