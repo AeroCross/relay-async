@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   # access
   get 'access/', to: 'access#login'
+  get 'access/sign_up', to: 'access#sign_up'
+  post 'access/sign_up', to: 'access#create'
   get 'access/index', to: 'access#login'
   get 'access/login', to: 'access#login'
   get 'access/logout', to: 'access#logout'

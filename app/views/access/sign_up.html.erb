@@ -1,0 +1,28 @@
+<div class="col-lg-4 col-lg-offset-4">
+  <h4>Sign Up</h4>
+  <hr />
+
+  <%= render partial: 'alerts/basic', locals: {flash: flash} %>
+
+  <%= form_tag '/access/sign_up', method: 'post' do %>
+      <div class="form-group">
+        <%= text_field_tag 'user[fullname]', nil, placeholder: 'Name', class: 'form-control'%>
+      </div>
+
+      <div class="form-group">
+        <%= text_field_tag 'user[email]', nil, placeholder: 'Email', class: 'form-control', type: :email %>
+      </div>
+
+      <div class="form-group">
+        <%= password_field_tag 'user[password]', nil, placeholder: 'Password', class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= password_field_tag 'user[password_confirm]', nil, placeholder: 'Verify your password', class: 'form-control' %>
+      </div>
+
+      <div class="btn-group pull-right" role="group">
+        <%= button_tag 'Create an account', type: 'submit', class: 'btn btn-primary' %>
+      </div>
+  <% end %>
+</div>
