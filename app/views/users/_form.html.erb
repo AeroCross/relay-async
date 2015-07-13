@@ -1,15 +1,6 @@
 <%= form_for(@user) do |f| %>
-    <% if @user.errors.any? %>
-        <div class="alert alert-warning">
-          <strong><%= @user.errors.count > 1 ? 'A few errors have' : 'An error has' %> occurred:</strong>
 
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render partial: 'alerts/form_errors', locals: {set: @user} %>
 
     <div class="form-group">
       <%= f.label :password %><br>
