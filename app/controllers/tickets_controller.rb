@@ -114,10 +114,12 @@ class TicketsController < ApplicationController
 
     if @user.nil?
       @user = User.new
+      @user.public = true
       @user.email = params[:email]
       @user.password = random_string(30)
       @user.fullname = nil
       @user.role = 'normal'
+      @user.verified = 'no'
       @user.save
     end
 
