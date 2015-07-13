@@ -24,5 +24,6 @@ class User < ActiveRecord::Base
   with_options if: :public? do |o|
     o.validates_format_of :email, with: /.+@.+\..+/i
     o.validates :email, presence: true
+    o.validates :password, presence: true
   end
 end
