@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   attr_accessor :public
 
   def public?
-    @public
+    @public || false
   end
 
   # unless this comes from the public facing forms, enforce these validations
