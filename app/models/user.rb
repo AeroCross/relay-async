@@ -5,8 +5,13 @@ class User < ActiveRecord::Base
 
   attr_accessor :public
 
+  def initialize(attributes = {})
+    super
+    @public ||= false
+  end
+
   def public?
-    @public || false
+    @public
   end
 
   # unless this comes from the public facing forms, enforce these validations
