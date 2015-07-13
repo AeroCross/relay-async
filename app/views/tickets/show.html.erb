@@ -36,10 +36,14 @@
 
   <!-- auth codes -->
   <div class="col-lg-2">
-    <div class="panel panel-warning">
-      <div class="panel-heading"><p class="panel-title">Admin Auth Code</p></div>
-      <div class="panel-body"><%= @ticket.auth_admin %></p></div>
-    </div>
+
+    <% if session[:role] == 'admin' %>
+        <div class="panel panel-warning">
+          <div class="panel-heading"><p class="panel-title">Admin Auth Code</p></div>
+          <div class="panel-body"><%= @ticket.auth_admin %></p></div>
+        </div>
+    <% end %>
+
     <div class="panel panel-success">
       <div class="panel-heading"><p class="panel-title">Client Auth Code</p></div>
       <div class="panel-body"><%= @ticket.auth_client %></div>

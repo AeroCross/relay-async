@@ -15,9 +15,12 @@ Rails.application.routes.draw do
   post 'access/attempt', to: 'access#attempt'
 
   # public history
-  get 'history', to: 'history#index'
-  get 'history/show', to: 'history#index'
-  post 'history/show', to: 'history#show'
+  get 'history', to: 'tickets#history_index'
+  post 'history', to: 'tickets#history_show'
+
+  # public submission form
+  get 'tickets/submit', to: 'tickets#submit_index'
+  post 'tickets/submit', to: 'tickets#submit_create'
 
   # chat API
   post 'chat/auth', to: 'chat#auth'
