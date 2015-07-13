@@ -2,7 +2,11 @@
   <h4>Sign Up</h4>
   <hr />
 
-  <%= render partial: 'alerts/basic', locals: {flash: flash} %>
+  <% if !@user.blank? && @user.errors.any? %>
+    <%= render partial: 'alerts/form_errors', locals: {set: @user} %>
+  <% elsif !notice.blank? %>
+    <%= render partial: 'alerts/basic', locals: {flash: flash} %>
+  <% end %>
 
   <%= form_tag '/access/sign_up', method: 'post' do %>
       <div class="form-group">
