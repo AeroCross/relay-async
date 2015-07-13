@@ -119,6 +119,7 @@ class TicketsController < ApplicationController
       @user.password = random_string(30)
       @user.fullname = nil
       @user.role = 'normal'
+      @user.verified = 'no'
       @user.save
     end
 

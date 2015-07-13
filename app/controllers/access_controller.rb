@@ -74,6 +74,8 @@ class AccessController < ApplicationController
     # check if the user exists using the email address so we can update the record instead of
     # making a new new one
 
+    success = false
+
     if params[:user][:password] != params[:user][:password_confirm]
       flash.now[:notice] = 'Passwords must match.'
       flash.now[:type] = 'warning'
@@ -81,24 +83,41 @@ class AccessController < ApplicationController
       return
     end
 
-    @user = User.where(email: params[:email]).first
+    @user = User.where(email: params[:user][:email]).first
+
+    unless @user.blank? || @user.verified == 'no'
+      flash.now[:notice] = 'Account has already been created.'
+      flash.now[:type] = 'warning'
+      render file: 'access/sign_up'
+      return
+    end
+
+    # user will be verified and the request comes from a public place
+    params[:user][:verified] = 'yes'
+    params[:user][:public] = true
 
     # user doesn't exist - create one from scratch
     if @user.blank?
-      @user = User.new
-      @user.fullname
+      @user = User.create(user_params)
+      if @user
+        success = true
+      end
 
       # user does exist - update the record so it includes the new information
     else
       if @user.update(user_params)
-        # all goodC
-        flash.now[:notice] = 'Account created!'
-        flash.now[:type] = 'success'
-        render file: 'access/sign_up'
-        return
+        success = true
       end
     end
 
+    if success
+      flash.now[:notice] = 'Account created!'
+      flash.now[:type] = 'success'
+      render file: 'access/sign_up'
+      return
+    end
+
+    # this, in theory, shouldn't happen
     flash.now[:notice] = 'Something happened when creating your account.'
     flash.now[:type] = 'warning'
     render file: 'access/sign_up'
@@ -107,7 +126,7 @@ class AccessController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :fullname, :password)
+    params.require(:user).permit(:email, :fullname, :password, :public, :verified)
   end
 
 end

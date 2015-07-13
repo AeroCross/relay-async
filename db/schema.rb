@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706200049) do
+ActiveRecord::Schema.define(version: 20150713230539) do
 
   create_table "messages", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150706200049) do
     t.datetime "updated_at",                                     null: false
     t.string   "password_digest", limit: 255
     t.string   "role",            limit: 255, default: "normal"
+    t.string   "verified",        limit: 255, default: "yes",    null: false
   end
 
 end
