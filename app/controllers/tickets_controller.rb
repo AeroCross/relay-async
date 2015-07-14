@@ -47,6 +47,12 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
+
+        # temporary
+        if Rails.application.config.async.notify_all_emails
+          TicketMailer.new_ticket(@ticket, Rails.application.config.async.notify_to).deliver_now
+        end
+
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.', flash: {type: 'success'} }
         format.json { render :show, status: :created, location: @ticket }
       else
@@ -133,6 +139,11 @@ class TicketsController < ApplicationController
     @ticket.save
 
     # 3. mail the user
+    # temporary
+    if Rails.application.config.async.notify_all_emails
+      TicketMailer.new_ticket(@ticket, Rails.application.config.async.notify_to).deliver_now
+    end
+
     # 4. redirect to the same screen with a success message
     if @ticket
       flash.now[:notice] = 'Thanks! We\'ve received your message and you should receive a response shortly.'
