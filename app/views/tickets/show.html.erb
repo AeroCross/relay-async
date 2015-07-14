@@ -36,17 +36,17 @@
 
   <!-- auth codes -->
   <div class="col-lg-2">
+    <div class="panel panel-info">
+      <div class="panel-heading"><p class="panel-title">Live chat options</p></div>
+      <div class="panel-body">
+        <% if session[:role] == 'admin' %>
+            <p><%= link_to 'Chat as Admin', Rails.configuration.sync.root + '/chat/' + params[:id] + '?email=' + session[:email] + '&auth=' + @ticket.auth_admin %></p>
+            <p><strong>Admin auth code:</strong><br /> <%= @ticket.auth_admin %></p>
+        <% end %>
 
-    <% if session[:role] == 'admin' %>
-        <div class="panel panel-warning">
-          <div class="panel-heading"><p class="panel-title">Admin Auth Code</p></div>
-          <div class="panel-body"><%= @ticket.auth_admin %></p></div>
-        </div>
-    <% end %>
-
-    <div class="panel panel-success">
-      <div class="panel-heading"><p class="panel-title">Client Auth Code</p></div>
-      <div class="panel-body"><%= @ticket.auth_client %></div>
+        <p><%= link_to 'Chat as Customer', Rails.configuration.sync.root + '/chat/' + params[:id] + '?email=' + @ticket.user.email + '&auth=' + @ticket.auth_client %></p>
+        <p><strong>Client auth code:</strong><br /> <%= @ticket.auth_client %></p>
+      </div>
     </div>
   </div>
 </div>
