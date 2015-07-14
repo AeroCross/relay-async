@@ -17,16 +17,17 @@
 
     <!-- reply form -->
     <%= form_tag '/messages/create' do |f| %>
-      <div class="form-group">
-        <%= label_tag 'message[content]', 'Send a reply' %>
-        <%= text_area_tag 'message[content]', nil, class: 'form-control', 'rows': 7 %>
-        <%= hidden_field_tag 'message[user_id]', @ticket.user.id %>
-        <%= hidden_field_tag 'message[ticket_id]', @ticket.id %>
-        <%= hidden_field_tag 'message[source]', 'ticket' %>
-        <%= hidden_field_tag 'referrer', '/history/show' %>
-      </div>
+        <div class="form-group">
+            <%= label_tag 'message[content]', 'Send a reply' %>
+            <%= text_area_tag 'message[content]', nil, class: 'form-control', 'rows': 7 %>
+            <%= hidden_field_tag 'message[user_id]', @ticket.user.id %>
+            <%= hidden_field_tag 'message[ticket_id]', @ticket.id %>
+            <%= hidden_field_tag 'message[source]', 'ticket' %>
+            <%= hidden_field_tag 'referrer', '/history/show' %>
+        </div>
 
-      <%= button_tag 'Send', class: 'btn btn-primary pull-right' %>
+        <%= link_to 'Start a live chat', Rails.application.config.sync.root + '/chat/' + @ticket.id.to_s + '?email=' + @ticket.user.email + '&auth=' + @ticket.auth_client, class: 'pull-left' %>
+        <%= button_tag 'Send', class: 'btn btn-primary pull-right' %>
     <% end %>
   </div>
 </div>
