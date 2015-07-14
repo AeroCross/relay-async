@@ -1,0 +1,8 @@
+<p>A new ticket has been created:</p>
+
+<ul>
+  <li><strong>Subject:</strong> <%= @ticket.subject %></li>
+  <li><strong>Content:</strong> <%= @ticket.content %></li>
+</ul>
+
+<p><%= link_to 'Go to ticket', @ticket_url %></p>

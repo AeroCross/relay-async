@@ -1,6 +1,6 @@
 class TicketMailer < ApplicationMailer
-  # @TODO: change when in production - maybe a config variable or somethinf
-  default from: 'notifications@example.com'
+  # @TODO: change when in production - maybe a config variable or something
+  default from: Rails.application.config.async.from
 
   # send email to the requester when a new response has been sent
   def chat_invite(user, ticket, message)
@@ -15,5 +15,11 @@ class TicketMailer < ApplicationMailer
 
     # send the email
     mail to: @user.email, subject: "Response about ##{@ticket.id}: #{@ticket.subject}"
+  end
+
+  def new_ticket(ticket, to)
+    @ticket = ticket
+    @ticket_url = ticket_url id: @ticket.id
+    mail to: to, subject: 'A new ticket has been opened.'
   end
 end
