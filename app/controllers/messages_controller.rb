@@ -18,8 +18,10 @@ class MessagesController < ApplicationController
           # refactor to modal
           user = User.find(params[:message][:user_id])
 
-          # send the email
-          TicketMailer.chat_invite(user, ticket, @message).deliver_now
+          # send the email only if the person that wrote the reply is not the ticket creator
+          if user.email != ticket.user.email
+            TicketMailer.chat_invite(ticket.user, ticket, @message).deliver_now
+          end
 
           # and send back to the previous view
           if params[:referrer] == '/history/show'
