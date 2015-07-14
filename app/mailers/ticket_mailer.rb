@@ -14,6 +14,6 @@ class TicketMailer < ApplicationMailer
     @chat_url     = Rails.configuration.sync.root + '/chat/' + @ticket.id.to_s + '?email=' + @user.email + '&auth=' + @auth
 
     # send the email
-    mail to: @user.email, subject: "Response about #{@ticket.id}: #{@ticket.subject}"
+    mail to: @user.email, subject: "Response about ##{@ticket.id}: #{@ticket.subject}"
   end
 end
