@@ -6,14 +6,22 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
+        # check which ticket this is
+        ticket = Ticket.find(params[:message][:ticket_id])
+
+        # and default back to open
+        ticket.status = 'open'
+        ticket.save
+
         # if the response is from the HTML form (/tickets/show) then send an email reply
         format.html do
           # refactor to modal
           user = User.find(params[:message][:user_id])
-          ticket = Ticket.find(params[:message][:ticket_id])
 
-          # send the email
-          TicketMailer.chat_invite(user, ticket, @message).deliver_now
+          # send the email only if the person that wrote the reply is not the ticket creator
+          if user.email != ticket.user.email
+            TicketMailer.chat_invite(ticket.user, ticket, @message).deliver_now
+          end
 
           # and send back to the previous view
           if params[:referrer] == '/history/show'
