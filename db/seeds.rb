@@ -18,14 +18,12 @@ id = Random.new
 # first, create a default admin and normal user
 u = [{
          fullname: 'Administrator',
-         username: 'admin',
          email: 'admin@example.com',
          password: 'admin',
          role: 'admin',
          created_at: random_date
      }, {
          fullname: 'John Doe',
-         username: 'jdoe',
          email: 'jdoe@example.com',
          password: 'jdoe',
          role: 'normal',
@@ -36,7 +34,6 @@ User.create(u)
 users.each do
   u = User.new
   u.fullname = Faker::Name.name
-  u.username = Faker::Internet.user_name
   u.email = Faker::Internet.email
   u.password = Faker::Internet.password
   u.save

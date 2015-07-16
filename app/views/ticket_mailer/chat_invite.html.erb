@@ -1,11 +1,13 @@
 <html>
 <body>
+<p>Hi there, <%= @user.fullname %>!</p>
+
 <p>You have a new response to your ticket: <strong><%= @ticket.subject %></strong></p>
 
 <blockquote><%= @message.content %></blockquote>
 
-<p>You can reply to it and find the full ticket history in the following link: <a href="<%= @ticket_url %>"><%= @ticket_url%></a></p>
+<p><%= link_to 'Go here', @ticket_url %> to reply to the ticket. You must have an account with us to do so. <%= link_to 'Sign up here', @sign_up_url %>.</p>
 
-<p>To start a live chat, click on the following link: <a href="<%= @chat_url %>"><%= @chat_url %></a>. Use auth code <strong><%=  @auth %></strong></p>
+<p><%= link_to 'Start a live chat here', @chat_url %>. Your live chat authentication code is <strong><%= @auth %></strong>.
 </body>
 </html>

@@ -1,16 +1,25 @@
 class TicketMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  # @TODO: change when in production - maybe a config variable or something
+  default from: Rails.application.config.async.from
+
+  # send email to the requester when a new response has been sent
   def chat_invite(user, ticket, message)
-    @user = user
+    # set up all variables to be used within the message
+    @user         = user
+    @ticket       = ticket
+    @message      = message
+    @auth         = Ticket.find(ticket).auth_client
+    @sign_up_url  = access_sign_up_url
+    @ticket_url   = ticket_url id: @ticket.id
+    @chat_url     = Rails.configuration.sync.root + '/chat/' + @ticket.id.to_s + '?email=' + @user.email + '&auth=' + @auth
+
+    # send the email
+    mail to: @user.email, subject: "Response about ##{@ticket.id}: #{@ticket.subject}"
+  end
+
+  def new_ticket(ticket, to)
     @ticket = ticket
-    @message = message
     @ticket_url = ticket_url id: @ticket.id
-
-    # to model
-    @auth = Ticket.find(ticket).auth_client
-
-    # @TODO: this should be a global default or something
-    @chat_url = 'http://localhost:8080/chat/' + @ticket.id.to_s
-    mail to: @user.email, subject: "Response about #{@ticket.id}: #{@ticket.subject}"
+    mail to: to, subject: 'A new ticket has been opened.'
   end
 end

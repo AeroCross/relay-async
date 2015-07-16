@@ -1,0 +1,11 @@
+<% if set.errors.any? %>
+    <div class="alert alert-warning">
+      <strong><%= set.errors.count > 1 ? 'A few errors have' : 'An error has' %> occurred:</strong>
+
+      <ul>
+        <% set.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>

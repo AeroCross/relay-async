@@ -1,0 +1,20 @@
+<div class="text-center">
+  <h3>View your ticket history</h3>
+  <p>We'll get all the information you need in a hearbeat.</p>
+</div>
+
+<%= form_tag '/history' do %>
+    <div class="form-group">
+      <%= label_tag :email, 'Email address' %>
+      <%= text_field_tag :email, nil, placeholder: 'Your email', class: 'form-control' %>
+      <p class="help-block">Be sure to use the email you used when you first contacted us.</p>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag :ticket_id, 'Ticket ID' %>
+      <%= text_field_tag :ticket_id, nil, placeholder: 'ID number', class: 'form-control' %>
+      <p class="help-block">e.g <strong>7291</strong> — this can be found in the message you received when you contacted us.</p>
+    </div>
+
+    <%= button_tag 'Send', class: 'btn btn-primary pull-right' %>
+<% end %>

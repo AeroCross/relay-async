@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Relay. A support system.</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 col-lg-push-3">
+
+      <% unless notice.blank? %>
+          <div class="text-center alert alert-<%= flash[:type].present? ? flash[:type] : 'info' %>">
+            <%= notice %>
+          </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

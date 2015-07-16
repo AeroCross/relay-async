@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # matched routes
   # messages
   post 'messages/create', to: 'messages#create'
@@ -9,13 +8,23 @@ Rails.application.routes.draw do
   get 'tickets/search', to: 'tickets#search'
 
   # access
-  get 'access/', to: 'access#login'
+  get 'access', to: 'access#login'
+  get 'access/sign_up', to: 'access#sign_up'
+  post 'access/sign_up', to: 'access#create'
   get 'access/index', to: 'access#login'
   get 'access/login', to: 'access#login'
   get 'access/logout', to: 'access#logout'
   post 'access/attempt', to: 'access#attempt'
 
-  # Chat API
+  # public history
+  get 'history', to: 'tickets#history_index'
+  post 'history', to: 'tickets#history_show'
+
+  # public submission form
+  get 'tickets/submit', to: 'tickets#submit_index'
+  post 'tickets/submit', to: 'tickets#submit_create'
+
+  # chat API
   post 'chat/auth', to: 'chat#auth'
 
   # root route when URL is accessed by itself

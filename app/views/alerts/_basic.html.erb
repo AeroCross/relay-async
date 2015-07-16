@@ -1,0 +1,5 @@
+<% unless notice.blank? %>
+    <div class="alert alert-<%= flash[:type] %>">
+      <%= notice %>
+    </div>
+<% end %>

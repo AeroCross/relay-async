@@ -1,21 +1,6 @@
 <%= form_for(@user) do |f| %>
-    <% if @user.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@user.errors.count, 'error') %> prohibited this user from being saved:</h2>
 
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="form-group">
-      <%= f.label :username %><br>
-      <%= f.text_field :username, {:class => 'form-control'} %>
-      <p class="help-block">Remember to use this name to log in next time!</p>
-    </div>
+    <%= render partial: 'alerts/form_errors', locals: {set: @user} %>
 
     <div class="form-group">
       <%= f.label :password %><br>
@@ -32,7 +17,7 @@
     <div class="form-group">
       <%= f.label :email %><br>
       <%= f.text_field :email, {:class => 'form-control'} %>
-      <p class="help-block">Notifications will arrive here</p>
+      <p class="help-block">You'll need to use this to log in and to track tickets. Also, notifications will arrive here</p>
     </div>
 
     <br />
