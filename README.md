@@ -1,8 +1,10 @@
 # Relay: Async
 
-A simple ticketing system based in Rails 4 that interacts with a Node.js-based live chat. **Not production ready**.
+A simple ticketing system based in Rails 4 that interacts with a Node.js-based live chat.
 
-This project will eventually evolve into a fully-fledged application, but in the meantime, it's just a research project for my MSc. and a playground to learn rails.
+**Not production ready**.
+
+This project will eventually evolve into a fully-fledged application, but in the meantime, it's just a research project for my MSc. and a playground to learn Ruby and Rails.
 
 ### Installation
 
