@@ -51,4 +51,4 @@ production:
   <<: *default
   database: relay_production
   username: relay
-  password: <%= ENV['COMM_DATABASE_PASSWORD'] %>
+  password: <%= ENV['RELAY_DATABASE_PASSWORD'] %>

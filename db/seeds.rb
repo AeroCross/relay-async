@@ -21,48 +21,48 @@ u = [{
          email: 'admin@example.com',
          password: 'admin',
          role: 'admin',
-         created_at: random_date
      }, {
          fullname: 'John Doe',
          email: 'jdoe@example.com',
          password: 'jdoe',
          role: 'normal',
-         created_at: random_date
      }]
 User.create(u)
 
-users.each do
-  u = User.new
-  u.fullname = Faker::Name.name
-  u.email = Faker::Internet.email
-  u.password = Faker::Internet.password
-  u.save
-  u.created_at = random_date
-  u.save
-end
+if Rails.env != 'production'
+  users.each do
+    u = User.new
+    u.fullname = Faker::Name.name
+    u.email = Faker::Internet.email
+    u.password = Faker::Internet.password
+    u.save
+    u.created_at = random_date
+    u.save
+  end
 
-# fill out tickets
-tickets.each do
-  t = Ticket.new
-  t.user_id = id.rand(users)
-  t.subject = Faker::Lorem.sentence(4, true, 6)
-  t.content = Faker::Lorem.paragraph(4, true, 6)
-  t.auth_client = random_string.upcase
-  t.auth_admin = random_string(20).upcase
-  t.save
-  t.created_at = random_date
-  t.save
-end
+  # fill out tickets
+  tickets.each do
+    t = Ticket.new
+    t.user_id = id.rand(users)
+    t.subject = Faker::Lorem.sentence(4, true, 6)
+    t.content = Faker::Lorem.paragraph(4, true, 6)
+    t.auth_client = random_string.upcase
+    t.auth_admin = random_string(20).upcase
+    t.save
+    t.created_at = random_date
+    t.save
+  end
 
-# fill out messages
-source = %w'chat ticket'
-messages.each do
-  m = Message.new
-  m.user_id = id.rand(users)
-  m.ticket_id = id.rand(tickets)
-  m.content = Faker::Lorem.sentence(2)
-  m.source = source[id.rand((0..1))]
-  m.save
-  m.created_at = random_date
-  m.save
+  # fill out messages
+  source = %w'chat ticket'
+  messages.each do
+    m = Message.new
+    m.user_id = id.rand(users)
+    m.ticket_id = id.rand(tickets)
+    m.content = Faker::Lorem.sentence(2)
+    m.source = source[id.rand((0..1))]
+    m.save
+    m.created_at = random_date
+    m.save
+  end
 end
