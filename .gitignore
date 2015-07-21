@@ -23,3 +23,6 @@
 
 # Ignore OS X-specific files
 .DS_Store
+
+# Ignore other secret files
+/config/database.yml
