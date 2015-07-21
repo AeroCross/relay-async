@@ -148,7 +148,7 @@ class TicketsController < ApplicationController
 
     # 4. redirect to the same screen with a success message
     if @ticket
-      flash.now[:notice] = 'Thanks! We\'ve received your message and you should receive a response shortly.'
+      flash.now[:notice] = "Thanks! Your ticket is <strong>##{@ticket.id}</strong> and you should receive a reply shortly.".html_safe
       flash.now[:type] = 'success'
       render({file: 'tickets/submit_index', layout: 'history'})
     else
