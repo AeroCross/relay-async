@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   post 'history', to: 'tickets#history_show'
 
   # public submission form
-  get  'submit',         to: 'tickets#submit_index'
-  post 'tickets/submit', to: 'tickets#submit_create'
+  get  'submit', to: 'tickets#submit_index'
+  post 'submit', to: 'tickets#submit_create'
 
   # chat API
   post 'chat/auth', to: 'chat#auth'

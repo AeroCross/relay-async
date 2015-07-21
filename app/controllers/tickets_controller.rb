@@ -108,12 +108,12 @@ class TicketsController < ApplicationController
     end
   end
 
-  # GET /ticket/submit
+  # GET /submit
   def submit_index
 
   end
 
-  # POST /ticket/submit
+  # POST /submit
   def submit_create
     # 1. check if the email doesn't exists so it can create a new blank user
     @user = User.where({email: params[:email]}).first
