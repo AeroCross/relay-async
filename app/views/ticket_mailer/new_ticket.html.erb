@@ -1,8 +1,18 @@
+<p>Hi there!</p>
+
 <p>A new ticket has been created:</p>
 
 <ul>
+  <li><strong>ID:</strong> <%= @ticket.id %></li>
   <li><strong>Subject:</strong> <%= @ticket.subject %></li>
   <li><strong>Content:</strong> <%= @ticket.content %></li>
 </ul>
 
-<p><%= link_to 'Go to ticket', @ticket_url %></p>
+<hr />
+
+<ul>
+  <li><%= link_to 'Go to ticket', @ticket_url %></li>
+  <li><%= link_to 'Go to livechat', @chat_url %></li>
+</ul>
+
+<p>Your livechat auth code for this ticket is <strong><%= @auth %></strong>.</p>

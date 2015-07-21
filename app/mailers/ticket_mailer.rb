@@ -18,8 +18,12 @@ class TicketMailer < ApplicationMailer
   end
 
   def new_ticket(ticket, to)
-    @ticket = ticket
-    @ticket_url = ticket_url id: @ticket.id
+    @ticket       = ticket
+    @user         = ticket.user
+    @auth         = ticket.auth_client
+    @ticket_url   = ticket_url id: @ticket.id
+    @chat_url     = Rails.configuration.sync.root + '/chat/' + @ticket.id.to_s + '?email=' + @user.email + '&auth=' + @auth
+
     mail to: to, subject: 'A new ticket has been opened.'
   end
 end
