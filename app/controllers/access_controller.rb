@@ -34,7 +34,7 @@ class AccessController < ApplicationController
         session[:role] = authorised_user.role
 
         # and redirect
-        redirect_to :root
+        redirect_to tickets_path
         return
 
       # incorrect information

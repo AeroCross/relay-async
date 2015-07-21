@@ -14,3 +14,15 @@
 
 # Ignore IDEA files
 /.idea/*
+
+# Ignore application configuration (from Figaro)
+/config/application.yml
+
+# Ignore precompiled assets
+/public/assets
+
+# Ignore OS X-specific files
+.DS_Store
+
+# Ignore other secret files
+/config/database.yml

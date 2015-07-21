@@ -108,12 +108,12 @@ class TicketsController < ApplicationController
     end
   end
 
-  # GET /ticket/submit
+  # GET /submit
   def submit_index
 
   end
 
-  # POST /ticket/submit
+  # POST /submit
   def submit_create
     # 1. check if the email doesn't exists so it can create a new blank user
     @user = User.where({email: params[:email]}).first
@@ -144,9 +144,11 @@ class TicketsController < ApplicationController
       TicketMailer.new_ticket(@ticket, Rails.application.config.async.notify_to).deliver_now
     end
 
+    TicketMailer.new_ticket(@ticket, @user.email).deliver_now
+
     # 4. redirect to the same screen with a success message
     if @ticket
-      flash.now[:notice] = 'Thanks! We\'ve received your message and you should receive a response shortly.'
+      flash.now[:notice] = "Thanks! Your ticket is <strong>##{@ticket.id}</strong> and you should receive a reply shortly.".html_safe
       flash.now[:type] = 'success'
       render({file: 'tickets/submit_index', layout: 'history'})
     else

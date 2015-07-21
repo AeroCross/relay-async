@@ -4,12 +4,10 @@ Rails.application.config.async = ActiveSupport::OrderedOptions.new
 
 # sync
 # root of the application
-# @TODO: per environment would be nice
-Rails.application.config.sync.root = 'http://localhost:8080'
+Rails.application.config.sync.root = ENV['SYNC_ROOT']
 
 # async
-# for testing purposes only: send all new tickets and responses to me
-# @TODO: also use environments
+# for testing purposes only — something better should be devised down the track
 Rails.application.config.async.notify_all_emails = true
-Rails.application.config.async.notify_to = 'mario@mariocuba.net'
-Rails.application.config.async.from = 'notifications@example.com'
+Rails.application.config.async.notify_to = ENV['NOTIFY_TO']
+Rails.application.config.async.from = 'notifications@relayapp.net'

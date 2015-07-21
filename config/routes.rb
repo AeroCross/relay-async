@@ -1,34 +1,37 @@
 Rails.application.routes.draw do
   # matched routes
   # messages
-  post 'messages/create', to: 'messages#create'
-  get 'messages/show/:id', to: 'messages#show'
+  post 'messages/create',   to: 'messages#create'
+  get  'messages/show/:id', to: 'messages#show'
 
   # tickets
   get 'tickets/search', to: 'tickets#search'
 
   # access
-  get 'access', to: 'access#login'
-  get 'access/sign_up', to: 'access#sign_up'
-  post 'access/sign_up', to: 'access#create'
-  get 'access/index', to: 'access#login'
-  get 'access/login', to: 'access#login'
-  get 'access/logout', to: 'access#logout'
-  post 'access/attempt', to: 'access#attempt'
+  get  'access',          to: 'access#login'
+  get  'access/sign_up',  to: 'access#sign_up'
+  post 'access/sign_up',  to: 'access#create'
+  get  'access/index',    to: 'access#login'
+  get  'access/login',    to: 'access#login'
+  get  'access/logout',   to: 'access#logout'
+  post 'access/attempt',  to: 'access#attempt'
 
   # public history
-  get 'history', to: 'tickets#history_index'
+  get  'history', to: 'tickets#history_index'
   post 'history', to: 'tickets#history_show'
 
   # public submission form
-  get 'tickets/submit', to: 'tickets#submit_index'
-  post 'tickets/submit', to: 'tickets#submit_create'
+  get  'submit', to: 'tickets#submit_index'
+  post 'submit', to: 'tickets#submit_create'
+
+  # introduction and instructions
+  get 'intro', to: 'intro#index'
 
   # chat API
   post 'chat/auth', to: 'chat#auth'
 
   # root route when URL is accessed by itself
-  root to: 'tickets#index'
+  root to: 'intro#index'
 
   # generated with the scaffolding
   resources :tickets
