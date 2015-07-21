@@ -144,6 +144,8 @@ class TicketsController < ApplicationController
       TicketMailer.new_ticket(@ticket, Rails.application.config.async.notify_to).deliver_now
     end
 
+    TicketMailer.new_ticket(@ticket, @user.email).deliver_now
+
     # 4. redirect to the same screen with a success message
     if @ticket
       flash.now[:notice] = 'Thanks! We\'ve received your message and you should receive a response shortly.'
