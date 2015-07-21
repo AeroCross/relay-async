@@ -24,11 +24,14 @@ Rails.application.routes.draw do
   get  'submit', to: 'tickets#submit_index'
   post 'submit', to: 'tickets#submit_create'
 
+  # introduction and instructions
+  get 'intro', to: 'intro#index'
+
   # chat API
   post 'chat/auth', to: 'chat#auth'
 
   # root route when URL is accessed by itself
-  root to: 'tickets#index'
+  root to: 'intro#index'
 
   # generated with the scaffolding
   resources :tickets
