@@ -91,7 +91,7 @@
               <% end %>
 
               (<%= message.created_at %>):
-              <%= message.content %>
+              <%= simple_format message.content %>
             </blockquote>
           </div>
 
@@ -105,7 +105,7 @@
               </div>
 
               <div class="panel-body">
-                <p><%= message.content %></p>
+                <p><%= simple_format message.content %></p>
               </div>
             </div>
           </div>
