@@ -14,7 +14,7 @@
 
     <p>
       <strong>Name:</strong>
-      <%= @user.fullname %>
+      <%= @user.fullname unless @user.fullname.nil?%>
     </p>
 
     <p>

@@ -32,7 +32,7 @@
             %>
 
               <tr>
-                <td><%= link_to ticket.user.fullname, edit_user_path(ticket.user.id) %></td>
+                <td><%= link_to ticket.user.email, edit_user_path(ticket.user.id) %></td>
                 <td><%= link_to ticket.subject, ticket_path(ticket.id) %></td>
                 <td><%= ticket.content %></td>
                 <td class="text-nowrap"><%= ticket.created_at %></td>
