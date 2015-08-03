@@ -6,7 +6,7 @@
 <%= form_tag '/submit' do %>
     <div class="form-group">
       <%= label_tag :email, 'Email address' %>
-      <%= text_field_tag :email, nil, placeholder: 'Your email', class: 'form-control' %>
+      <%= email_field_tag :email, nil, placeholder: 'Your email', class: 'form-control' %>
       <p class="help-block">You'll be notified when we reply to your though here.</p>
     </div>
 
