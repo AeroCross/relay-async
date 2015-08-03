@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   # unless this comes from the public facing forms, enforce these validations
   with_options unless: :public? do |o|
     o.validates :email, presence: true
-    o.validates_format_of :email, with: /.+@.+\..+/i
+    # o.validates_format_of :email, with: /.+@.+\..+/i
     o.validates_uniqueness_of :email
     o.validates :fullname, presence: true
     o.validates :role, presence: true
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   # if this comes from the public facing forms, enforce these validations
   # usually from tickets#submit
   with_options if: :public? do |o|
-    o.validates_format_of :email, with: /.+@.+\..+/i
+    # o.validates_format_of :email, with: /.+@.+\..+/i
     o.validates :email, presence: true
     o.validates :password, presence: true
   end
